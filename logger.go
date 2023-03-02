@@ -59,6 +59,8 @@ type Logger interface {
 
 	// With returns a new sub logger with the given key value pairs.
 	With(keyval ...interface{}) Logger
+	// WithPrefix returns a new sub logger with the given prefix.
+	WithPrefix(prefix string) Logger
 
 	// Debug logs a debug message.
 	Debug(msg interface{}, keyval ...interface{})

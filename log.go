@@ -294,6 +294,13 @@ func (l *logger) With(keyvals ...interface{}) Logger {
 	return &sl
 }
 
+// WithPrefix returns a new logger with the given prefix added.
+func (l *logger) WithPrefix(prefix string) Logger {
+	sl := l.With()
+	sl.SetPrefix(prefix)
+	return sl
+}
+
 // Debug prints a debug message.
 func (l *logger) Debug(msg interface{}, keyvals ...interface{}) {
 	l.log(DebugLevel, msg, keyvals...)
