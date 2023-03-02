@@ -10,7 +10,7 @@ import (
 
 func TestLogfmt(t *testing.T) {
 	var buf bytes.Buffer
-	l := New(WithOutput(&buf), WithFormatter(LogfmtFormatter))
+	l := New(WithLogOutput(&buf), WithLogFormatter(LogfmtFormatter))
 	cases := []struct {
 		name     string
 		expected string

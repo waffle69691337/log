@@ -3,10 +3,7 @@ package log
 import "context"
 
 // WithContext wraps the given logger in context.
-func WithContext(ctx context.Context, logger Logger, keyvals ...interface{}) context.Context {
-	if len(keyvals) > 0 {
-		logger = logger.With(keyvals...)
-	}
+func WithContext(ctx context.Context, logger Logger) context.Context {
 	return context.WithValue(ctx, loggerContextKey, logger)
 }
 

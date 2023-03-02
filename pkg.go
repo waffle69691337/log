@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-var defaultLogger = New(WithTimestamp()).(*logger)
+var defaultLogger = New(WithLogTimestamp()).(*logger)
 
 // Default returns the default logger. The default logger comes with timestamp enabled.
 func Default() Logger {

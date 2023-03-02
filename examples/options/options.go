@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	logger := log.New(log.WithTimestamp(), log.WithTimeFormat(time.Kitchen),
-		log.WithCaller(), log.WithPrefix("Baking 🍪 "))
+	logger := log.New(log.WithLogTimestamp(), log.WithLogTimeFormat(time.Kitchen),
+		log.WithLogCaller(), log.WithLogPrefix("Baking 🍪 "))
 	logger.Info("Starting oven!", "degree", 375)
 	time.Sleep(3 * time.Second)
 	logger.Info("Finished baking")

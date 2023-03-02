@@ -22,7 +22,7 @@ func _zeroTime() time.Time {
 
 func TestTextCaller(t *testing.T) {
 	var buf bytes.Buffer
-	logger := New(WithOutput(&buf), WithCaller())
+	logger := New(WithLogOutput(&buf), WithLogCaller())
 	// We calculate the caller offset based on the caller line number.
 	_, file, line, _ := runtime.Caller(0)
 	cases := []struct {
@@ -90,7 +90,7 @@ func TestTextCaller(t *testing.T) {
 
 func TestTextLogger(t *testing.T) {
 	var buf bytes.Buffer
-	logger := New(WithOutput(&buf))
+	logger := New(WithLogOutput(&buf))
 	cases := []struct {
 		name     string
 		expected string
@@ -201,7 +201,7 @@ func TestTextLogger(t *testing.T) {
 
 func TestTextHelper(t *testing.T) {
 	var buf bytes.Buffer
-	logger := New(WithOutput(&buf), WithCaller())
+	logger := New(WithLogOutput(&buf), WithLogCaller())
 
 	helper := func() {
 		logger.Helper()
@@ -216,7 +216,7 @@ func TestTextHelper(t *testing.T) {
 
 func TestTextFatal(t *testing.T) {
 	var buf bytes.Buffer
-	logger := New(WithOutput(&buf), WithCaller())
+	logger := New(WithLogOutput(&buf), WithLogCaller())
 	if os.Getenv("FATAL") == "1" {
 		logger.Fatal("i'm dead")
 		return
@@ -232,7 +232,7 @@ func TestTextFatal(t *testing.T) {
 
 func TestTextValueStyles(t *testing.T) {
 	var buf bytes.Buffer
-	logger := New(WithOutput(&buf)).(*logger)
+	logger := New(WithLogOutput(&buf)).(*logger)
 	logger.noStyles = false
 	oldValueStyle := ValueStyle
 	defer func() { ValueStyle = oldValueStyle }()

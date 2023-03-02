@@ -13,7 +13,7 @@ import (
 
 func TestJson(t *testing.T) {
 	var buf bytes.Buffer
-	l := New(WithOutput(&buf), WithFormatter(JSONFormatter))
+	l := New(WithLogOutput(&buf), WithLogFormatter(JSONFormatter))
 	cases := []struct {
 		name     string
 		expected string
@@ -124,8 +124,8 @@ func TestJson(t *testing.T) {
 
 func TestJsonCaller(t *testing.T) {
 	var buf bytes.Buffer
-	l := New(WithOutput(&buf), WithLevel(DebugLevel),
-		WithFormatter(JSONFormatter), WithCaller())
+	l := New(WithLogOutput(&buf), WithLogLevel(DebugLevel),
+		WithLogFormatter(JSONFormatter), WithLogCaller())
 	_, file, line, _ := runtime.Caller(0)
 	cases := []struct {
 		name     string
@@ -169,8 +169,8 @@ func TestJsonCustomKey(t *testing.T) {
 		TimestampKey = oldTsKey
 	}()
 	TimestampKey = "time"
-	logger := New(WithOutput(&buf), WithTimestamp(),
-		WithTimeFunction(_zeroTime), WithFormatter(JSONFormatter))
+	logger := New(WithLogOutput(&buf), WithLogTimestamp(),
+		WithLogTimeFunction(_zeroTime), WithLogFormatter(JSONFormatter))
 	logger.Info("info")
 	require.Equal(t, "{\"lvl\":\"info\",\"msg\":\"info\",\"time\":\"0001/01/01 00:00:00\"}\n", buf.String())
 }
